@@ -50,9 +50,3 @@ def set_to_file(links, file):
     delete_file_contents(file)
     for link in sorted(links):
         append_to_file(file, link)
-
-
-
-
-create_directory('mp3zing')
-create_data_file('mp3zing', 'https://mp3.zing.vn')
