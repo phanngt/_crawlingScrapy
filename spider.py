@@ -1,6 +1,16 @@
-from link_finder import  LinkFinder
+from link_finder import LinkFinder
 from urllib.request import urlopen
 from general import *
+import ssl
+
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    # Legacy Python that doesn't verify HTTPS certificates by default
+    pass
+else:
+    # Handle target environment that doesn't support HTTPS verification
+    ssl._create_default_https_context = _create_unverified_https_context
 
 
 class Spider:
@@ -16,8 +26,8 @@ class Spider:
         Spider.project_name = project_name
         Spider.base_url = base_url
         Spider.domain_name = domain_name
-        Spider.queued_file = Spider.project_name + '/queue_file.txt'
-        Spider.crawled_file = Spider.project_name + '/crawled_file.txt'
+        Spider.queued_file = os.path.dirname(os.path.realpath(__file__)) + '/' + Spider.project_name + '/queue.txt'
+        Spider.crawled_file = os.path.dirname(os.path.realpath(__file__)) + '/' + Spider.project_name + '/crawled.txt'
         Spider.boot()
         Spider.crawled_page('First spider', Spider.base_url)
 
@@ -68,3 +78,4 @@ class Spider:
     def update_files():
         set_to_file(Spider.queue, Spider.queued_file)
         set_to_file(Spider.crawled, Spider.crawled_file)
+
