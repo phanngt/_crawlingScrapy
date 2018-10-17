@@ -68,5 +68,3 @@ class Spider:
     def update_files():
         set_to_file(Spider.queue, Spider.queued_file)
         set_to_file(Spider.crawled, Spider.crawled_file)
-
-
