@@ -9,3 +9,4 @@ def create_directory(directory):
 
 create_directory('spotify')
 create_directory('zingMp3')
+create_directory('forfun')
